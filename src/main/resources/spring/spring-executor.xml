@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd">
+
+    <!--注解@Async默认使用的池-->
+    <task:annotation-driven executor="asyncExecutor"/>
+    <task:executor id="asyncExecutor"
+                   pool-size="${async.corePoolSize}" queue-capacity="${async.queueCapacity}" keep-alive="${async.keepAliveSeconds}"
+                   rejection-policy="CALLER_RUNS"/>
+
+    <bean id="commonExecutor"
+          class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="${executor.corePoolSize}"/>
+        <property name="keepAliveSeconds" value="${executor.keepAliveSeconds}"/>
+        <property name="maxPoolSize" value="${executor.maxPoolSize}"/>
+        <property name="queueCapacity" value="${executor.queueCapacity}"/>
+    </bean>
+
+</beans>
