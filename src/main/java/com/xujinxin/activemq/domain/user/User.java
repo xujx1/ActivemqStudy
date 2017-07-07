@@ -4,6 +4,7 @@ import com.xujinxin.activemq.domain.CommonDomain;
 
 /**
  * Created by xujinxin on 2017/7/7.
+ * 用户信息
  */
 public class User extends CommonDomain {
 

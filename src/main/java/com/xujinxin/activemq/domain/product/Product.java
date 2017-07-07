@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 /**
  * Created by xujinxin on 2017/7/7.
- * 商品
+ * 商品信息
  */
 public class Product extends CommonDomain {
 

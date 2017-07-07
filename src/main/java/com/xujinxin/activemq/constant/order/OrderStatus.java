@@ -11,6 +11,7 @@ import java.util.Optional;
 
 /**
  * Created by xujinxin on 2017/7/7.
+ * 订单状态
  */
 public enum OrderStatus implements CommonEnum {
 
