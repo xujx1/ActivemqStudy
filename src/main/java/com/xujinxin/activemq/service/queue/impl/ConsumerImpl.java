@@ -4,7 +4,6 @@ import com.xujinxin.activemq.annotation.IgnoreLog;
 import com.xujinxin.activemq.service.queue.IConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jms.core.MessageCreator;
 
 import javax.jms.*;
 
