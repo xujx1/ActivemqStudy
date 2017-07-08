@@ -166,6 +166,13 @@
             <artifactId>activemq-spring</artifactId>
             <version>${activemq-version}</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-jaas</artifactId>
+            <version>${activemq-version}</version>
+        </dependency>
         <!-- activemq end-->
 
         <!-- lang3 start-->
