@@ -31,6 +31,18 @@
         <constructor-arg index="0" value="${queue.request.name}"/>
     </bean>
 
+    <bean id="simpleAuthenticationPlugin" class="org.apache.activemq.security.SimpleAuthenticationPlugin">
+        <property name="users">
+            <list>
+                <bean class="org.apache.activemq.security.AuthenticationUser">
+                    <property name="username" value="user"/>
+                    <property name="password" value="pwd"/>
+                    <property name="groups" value="admin"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
 
     <!--订单消息格式转换器-->
     <bean id="messageConverter" class="com.xujinxin.activemq.utils.OrderMessageConverter"/>
