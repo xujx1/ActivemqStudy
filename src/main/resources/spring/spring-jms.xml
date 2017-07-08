@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -10,9 +11,16 @@
         <property name="brokerURL" value="${mq.address}"/>
     </bean>
 
+    <!-- 配置Session连接池 -->
+    <bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory" ref="connectionFactory"/>
+        <property name="sessionCacheSize" value="10"/>
+    </bean>
+
+
     <!-- 配置JMS模版 -->
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="connectionFactory" ref="cachingConnectionFactory"/>
     </bean>
 
     <!-- 发送消息的目的地（一个队列） -->
@@ -30,7 +38,7 @@
 
     <!-- 监听容器 -->
     <bean id="jmsContainerRequest" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="connectionFactory" ref="cachingConnectionFactory"/>
         <property name="destination" ref="requestDestination"/>
         <property name="messageListener" ref="consumer"/>
         <property name="taskExecutor" ref="commonExecutor"/>
