@@ -30,11 +30,17 @@
         <!-- 设置消息队列的名字 -->
         <constructor-arg index="0" value="${queue.request.name}"/>
     </bean>
+
+
     <!--订单消息格式转换器-->
     <bean id="messageConverter" class="com.xujinxin.activemq.utils.OrderMessageConverter"/>
 
+    <!--自定义jms异常处理类-->
+    <bean id="errorHandler" class="com.xujinxin.activemq.utils.CustomJmsErrorHandler"/>
+
     <!-- 消息生产者 -->
     <bean id="producer" class="com.xujinxin.activemq.service.queue.impl.ProducerImpl"/>
+
 
     <!-- 消息消费者 -->
     <bean id="consumer" class="com.xujinxin.activemq.service.queue.impl.ConsumerImpl"/>
@@ -44,7 +50,8 @@
         <property name="connectionFactory" ref="cachingConnectionFactory"/>
         <property name="destination" ref="requestDestination"/>
         <property name="messageListener" ref="consumer"/>
-        <property name="taskExecutor" ref="commonExecutor"/>
+        <property name="taskExecutor" ref="jmsExecutor"/>
+        <property name="errorHandler" ref="errorHandler"/>
     </bean>
 
 

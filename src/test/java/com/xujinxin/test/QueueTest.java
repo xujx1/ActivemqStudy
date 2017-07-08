@@ -1,5 +1,6 @@
 package com.xujinxin.test;
 
+import com.xujinxin.activemq.constant.order.OrderStatus;
 import com.xujinxin.activemq.domain.order.Order;
 import com.xujinxin.activemq.domain.product.Product;
 import com.xujinxin.activemq.domain.user.User;
@@ -42,6 +43,7 @@ public class QueueTest {
         order.setId(1);
         order.setUser(user);
         order.setProduct(product);
+        order.setStatus(OrderStatus.DELIVERY.getCode());
         producer.sendMessage(order);
     }
 }

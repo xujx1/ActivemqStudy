@@ -27,7 +27,12 @@ public class ConsumerImpl implements IConsumer, MessageListener {
     @IgnoreLog
     public void onMessage(Message message) {
         LOGGER.info("消费者接受消息为[{}]", message);
-        Order order = (Order) jmsTemplate.receiveAndConvert();
+        Order order = null;
+        try {
+            order = (Order) jmsTemplate.getMessageConverter().fromMessage(message);
+        } catch (JMSException e) {
+            LOGGER.info("消费者转换消息异常[{}]", e);
+        }
         LOGGER.info("消费者接受消息为[{}]", order);
     }
 }
