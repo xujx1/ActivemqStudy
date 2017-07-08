@@ -36,11 +36,10 @@
     <bean id="messageConverter" class="com.xujinxin.activemq.utils.OrderMessageConverter"/>
 
     <!--自定义jms异常处理类-->
-    <bean id="errorHandler" class="com.xujinxin.activemq.utils.CustomJmsErrorHandler"/>
+    <bean id="errorHandler" class="com.xujinxin.activemq.utils.JmsErrorHandler"/>
 
     <!-- 消息生产者 -->
     <bean id="producer" class="com.xujinxin.activemq.service.queue.impl.ProducerImpl"/>
-
 
     <!-- 消息消费者 -->
     <bean id="consumer" class="com.xujinxin.activemq.service.queue.impl.ConsumerImpl"/>

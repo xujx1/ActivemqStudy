@@ -6,14 +6,13 @@ import org.springframework.util.ErrorHandler;
 
 /**
  * Created by xujinxin on 2017/7/8.
- * 自定义jms异常处理类
+ * 自定义线程池异常捕获类
  */
-public class CustomJmsErrorHandler implements ErrorHandler {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomJmsErrorHandler.class);
+public class ThreadPollErrorHandler implements ErrorHandler{
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadPollErrorHandler.class);
 
     @Override
     public void handleError(Throwable t) {
-        LOGGER.error("[JMS Message Handle Error]", t);
+        LOGGER.error("[ThreadPoll Error]", t);
     }
 }

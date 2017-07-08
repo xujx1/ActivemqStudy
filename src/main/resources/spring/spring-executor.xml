@@ -7,12 +7,18 @@
 
 
     <bean id="jmsExecutor"
-          class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-        <property name="corePoolSize" value="${executor.corePoolSize}"/>
-        <property name="keepAliveSeconds" value="${executor.keepAliveSeconds}"/>
-        <property name="maxPoolSize" value="${executor.maxPoolSize}"/>
-        <property name="queueCapacity" value="${executor.queueCapacity}"/>
+          class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+        <property name="poolSize" value="${executor.corePoolSize}"/>
+        <property name="awaitTerminationSeconds" value="${executor.keepAliveSeconds}"/>
         <property name="threadNamePrefix" value="JmsExecutor_"/>
+        <property name="waitForTasksToCompleteOnShutdown" value="true"/>
+        <property name="errorHandler" >
+            <bean class="com.xujinxin.activemq.utils.ThreadPollErrorHandler"/>
+        </property>
+        <property name="rejectedExecutionHandler">
+            <bean class="com.xujinxin.activemq.utils.TaskRejectedExecutionHandler"/>
+        </property>
+
     </bean>
 
 </beans>
