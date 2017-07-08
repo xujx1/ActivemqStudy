@@ -33,7 +33,9 @@
         <property name="connectionFactory" ref="connectionFactory"/>
         <property name="destination" ref="requestDestination"/>
         <property name="messageListener" ref="consumer"/>
+        <property name="taskExecutor" ref="commonExecutor"/>
     </bean>
+
 
 
 </beans>
