@@ -21,6 +21,8 @@
     <!-- 配置JMS模版 -->
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="cachingConnectionFactory"/>
+        <property name="messageConverter" ref="messageConverter"/>
+        <property name="defaultDestination" ref="requestDestination"/>
     </bean>
 
     <!-- 发送消息的目的地（一个队列） -->
@@ -28,7 +30,8 @@
         <!-- 设置消息队列的名字 -->
         <constructor-arg index="0" value="${queue.request.name}"/>
     </bean>
-
+    <!--订单消息格式转换器-->
+    <bean id="messageConverter" class="com.xujinxin.activemq.utils.OrderMessageConverter"/>
 
     <!-- 消息生产者 -->
     <bean id="producer" class="com.xujinxin.activemq.service.queue.impl.ProducerImpl"/>
@@ -43,7 +46,6 @@
         <property name="messageListener" ref="consumer"/>
         <property name="taskExecutor" ref="commonExecutor"/>
     </bean>
-
 
 
 </beans>
